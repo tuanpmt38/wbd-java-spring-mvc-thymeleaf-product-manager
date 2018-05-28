@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="layout::head"></head>
+<body>
+<table id="customers">
+    <h1>List product</h1>
+    <p>
+        <a th:href="@{product/create}">Creat new Product</a>
+    </p>
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+
+    <form  method="get"><input type="text" name="key" action="product/search"><button >Search</button></form><br>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Discription</th>
+        <th>Producer</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="row : ${products}" >
+            <td th:text="${row.getName()}"></td>
+            <td th:text="${row.getPrice()}"></td>
+            <td th:text="${row.getDesription()}"></td>
+            <td th:text="${row.getProducer()}"></td>
+            <td><a th:href="@{/product/{id}/edit(id=${row.getId()})}">edit</a></td>
+            <td><a th:href="@{/product/{id}/delete(id=${row.getId()})}">delete</a></td>
+            <td><a th:href="@{/product/{id}/view(id=${row.getId()})}">view</a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+<footer th:replace="layout :: footer"></footer>
+</html>
